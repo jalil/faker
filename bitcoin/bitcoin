@@ -1,0 +1,11 @@
+package bitcoin
+
+import "base"
+
+func Address() string {
+	return base.BitcoinAddress()
+}
+
+func TestNetAddress() string {
+	return base.BitcoinTestNetAddr()
+}
