@@ -9,7 +9,7 @@ import (
 
 //JsonData reads in json file
 func JsonData() ([]byte, error) {
-	data, err := ioutil.ReadFile("/Users/jalil/go/src/faker/en-US.json")
+	data, err := ioutil.ReadFile("en-US.json")
 
 	return data, err
 }
