@@ -3,7 +3,7 @@ This package  is a port of Perl's Data::Faker library that generates fake data s
 
 ###Install###
 ```
-$go get github.com/jalil/faker
+$go get github.com/jalil/faker/...
 ```
 
 
