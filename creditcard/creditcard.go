@@ -1,6 +1,7 @@
-package main
+package creditcard
 
 import (
+	"encoding/json"
 	"faker"
 	"fmt"
 	"math/rand"
@@ -9,9 +10,50 @@ import (
 func init() {
 	faker.Seeder()
 }
+
+type CardData struct {
+	CreditCard struct {
+		CardType   []string `json:"card_types"`
+		CardNumber []string `json:"card_numbers"`
+	} `json:"creditcard"`
+}
+
+func cardType() []string {
+	carddata := &CardData{}
+
+	data, err := faker.JsonData()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = json.Unmarshal([]byte(data), &carddata)
+	if err != nil {
+		panic(err)
+	}
+
+	return carddata.CreditCard.CardType
+
+}
+
+func cardNumber() []string {
+	carddata := &CardData{}
+
+	data, err := faker.JsonData()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = json.Unmarshal([]byte(data), &carddata)
+	if err != nil {
+		panic(err)
+	}
+
+	return carddata.CreditCard.CardNumber
+
+}
 func Number() string {
-	cardlen := len(faker.CardNumber())
-	return faker.CardNumber()[rand.Intn(cardlen)]
+	cardlen := len(cardNumber())
+	return cardNumber()[rand.Intn(cardlen)]
 }
 
 //NEED TO FND A WAY TO RETURN TIME.DATE
@@ -21,8 +63,8 @@ func Number() string {
 //}
 
 func CardType() string {
-	cardlen := len(faker.CardType())
-	return faker.CardType()[rand.Intn(cardlen)]
+	cardlen := len(cardType())
+	return cardType()[rand.Intn(cardlen)]
 }
 
 func main() {

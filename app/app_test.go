@@ -1,6 +1,7 @@
 package app
 
 import (
+	"faker/app"
 	"fmt"
 	"testing"
 )
@@ -10,18 +11,6 @@ func TestName(t *testing.T) {
 	name := app.Name()
 	fmt.Println(name)
 
-	//if n != "Twizzle" {
-	//t.Error("Expected Twizzle, got", n)
-	//}
-	//}
-
-	//func TestVersion(t *testing.T) {
-	//var n float64
-	//n = Verson()
-
-	//if n != 1.0 {
-	//t.Error("Expected 1.0, got", n)
-	//}
 }
 
 func TestAuthorName(t *testing.T) {

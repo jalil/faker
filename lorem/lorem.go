@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"faker"
 	"fmt"
-	"io/ioutil"
 	"math/rand"
 )
+
+const ALPHABETS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
 
 type LoremData struct {
 	Lorem struct {
@@ -17,7 +18,7 @@ type LoremData struct {
 func LoremWords() []string {
 	loremdata := &LoremData{}
 
-	data, err := ioutil.ReadFile("/Users/jalil/go/src/faker/phony.json")
+	data, err := faker.JsonData()
 
 	err = json.Unmarshal([]byte(data), &loremdata)
 	if err != nil {
@@ -28,33 +29,24 @@ func LoremWords() []string {
 
 }
 
-func LoremSentence() []string {
-	nameD := &LoremData{}
-
-	data, err := ioutil.ReadFile("/Users/jalil/go/src/faker/phony.json")
-
-	err = json.Unmarshal([]byte(data), &nameD)
-	if err != nil {
-		panic(err)
-	}
-
-	return nameD.Lorem.Words
-
+func loremSentence() []string {
+	//NOT DONE
+	return loremWords()
 }
 
-const ALPHABETS = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
-
+//Runs before main
 func init() {
 	faker.Seeder()
 }
 
 func Word() string {
-	loremLen := len(LoremWords())
-	return LoremWords()[rand.Intn(loremLen)]
+	loremLen := len(loremWords())
+	return loremWords()[rand.Intn(loremLen)]
 }
 
 func Text() []string {
-	return LoremSentence()
+	//NOT DONE!
+	return loremSentence()
 }
 
 func Character() string {

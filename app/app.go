@@ -36,7 +36,9 @@ func Name() string {
 	return AppName()[rand.Intn(NameLen)]
 }
 
+//Version returns a float64  of the app Version
 func Version() float64 {
+	//NOT DONE.  two decimal places
 	return rand.Float64() * 5
 }
 

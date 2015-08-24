@@ -1,57 +1,163 @@
-package address
+package main
 
 import (
+	"encoding/json"
 	"faker"
 	"faker/name"
+	"fmt"
 	"math/rand"
 	"strconv"
 )
 
+type AddressData struct {
+	Address struct {
+		CityPrefix   []string `json:"city_prefix"`
+		City         []string `json:"city_suffix"`
+		Country      []string `json:"country"`
+		CountryCode  []string `json:"country_code"`
+		State        []string `json:"state"`
+		StateCode    []string `json:"state_abbr"`
+		StreetSuffix []string `json:"street_suffix"`
+	} `json:"address"`
+}
+
+func CityPrefix() []string {
+	addressdata := &AddressData{}
+
+	data, err := faker.JsonData()
+
+	err = json.Unmarshal([]byte(data), &addressdata)
+	if err != nil {
+		panic(err)
+	}
+
+	return addressdata.Address.CityPrefix
+}
+
+func stateData() []string {
+	addressdata := &AddressData{}
+
+	data, err := faker.JsonData()
+
+	err = json.Unmarshal([]byte(data), &addressdata)
+	if err != nil {
+		panic(err)
+	}
+
+	return addressdata.Address.State
+}
+
+func suffixData() []string {
+	addressdata := &AddressData{}
+
+	data, err := faker.JsonData()
+
+	err = json.Unmarshal([]byte(data), &addressdata)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return addressdata.Address.StreetSuffix
+}
+
+func countryCode() []string {
+	addressdata := &AddressData{}
+
+	data, err := faker.JsonData()
+
+	err = json.Unmarshal([]byte(data), &addressdata)
+	if err != nil {
+		panic(err)
+	}
+
+	return addressdata.Address.CountryCode
+}
+
+func countryData() []string {
+	addressdata := &AddressData{}
+
+	data, err := faker.JsonData()
+
+	err = json.Unmarshal([]byte(data), &addressdata)
+	if err != nil {
+		panic(err)
+	}
+
+	return addressdata.Address.Country
+}
+
+func cityData() []string {
+	addressdata := &AddressData{}
+
+	data, err := faker.JsonData()
+
+	err = json.Unmarshal([]byte(data), &addressdata)
+	if err != nil {
+		panic(err)
+	}
+
+	return addressdata.Address.City
+}
+
+//This runs before any function call by default in GO.
+//No need to seed rand in my functions!
 func init() {
-	//This runs before any function call by default in GO.
-	//No need to seed rand in my functions!
 	faker.Seeder()
 }
+
+//Country return country name, panics if its cant read json data
 func Country() string {
-	return faker.Country()[rand.Intn(len(faker.Country()))]
+	return countryData()[rand.Intn(len(countryData()))]
 }
 
+//Country return country name, panics if its cant read json data
 func CountryCode() string {
-	return faker.CountryCode()[rand.Intn(len(faker.CountryCode()))]
+	return countryCode()[rand.Intn(len(countryCode()))]
 }
 
+//Country return country name, panics if its cant read json data
 func Street() string {
-	suffix := faker.Suffix()[rand.Intn(len(faker.Suffix()))]
-	return name.FirstName() + " " + suffix
+	//suffix := suffixData()[rand.Intn(len(suffixData()))]
+	suffix := suffixData()[rand.Intn(len(suffixData()))]
+	return name.LastName() + " " + suffix
 }
 
+//Country return country name, panics if its cant read json data
 func StreetAddress() string {
 	return HouseNumber() + " " + Street()
 }
 
+//Country return country name, panics if its cant read json data
 func City() string {
-	return faker.City()[rand.Intn(len(faker.City()))]
+	return cityData()[rand.Intn(len(cityData()))]
 }
 
+//Country return country name, panics if its cant read json data
 func State() string {
-	return faker.State()[rand.Intn(50)]
+	return stateData()[rand.Intn(50)]
 }
 
+//Country return country name, panics if its cant read json data
 func HouseNumber() string {
 	streetnumber := rand.Intn(1000)
 	return strconv.Itoa(streetnumber)
 }
 
 //func Postalcode() string {
-//faker.Seeder()
-//return rand.Floatn()
 //return faker.Postcode()[rand.Intn(50)]
 //}
 
+//Longitude return float64 longitude
 func Longitude() float64 {
 	return rand.Float64() * 180
 }
 
+//Latitude return float64 of latitude
 func Latitude() float64 {
 	return rand.Float64() * 180
+}
+
+//Country return country name, panics if its cant read json data
+func main() {
+	fmt.Println(Street())
 }

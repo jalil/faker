@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+const ALPHA = "qwertyuiopasdfghjkklzxcvbnm1234567890!@#$%^&*()+?>"
+
 type InternetData struct {
 	Internet struct {
 		DomainSuffix []string `json:"domain_suffix"`
@@ -49,8 +51,6 @@ func internetDomain() []string {
 
 }
 
-//const ALPHABETS = "q1w2e3r4t5y6u7i8o9@p#a$s%d^&f*g(h)j{k}lzxcvbnm"
-
 func Url() string {
 	return protocol() + strings.ToLower(name.FirstName()) + "." + publicEmail()[rand.Intn(len(publicEmail()))]
 }
@@ -64,7 +64,15 @@ func UserName() string {
 }
 
 func Password() string {
-	return "not yet implemented"
+
+	faker.Seeder()
+	passwd := []byte(ALPHA)
+	words := make([]string, 8)
+	passwdlen := len(ALPHA)
+	for i := 0; i < 9; i++ {
+		words = append(words, string(passwd[rand.Intn(passwdlen)]))
+	}
+	return strings.Join(words, "")
 }
 
 func MacAddress() string {
