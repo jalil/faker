@@ -1,10 +1,8 @@
-package main
+package address
 
 import (
-	"encoding/json"
 	"faker"
 	"faker/name"
-	"fmt"
 	"math/rand"
 	"strconv"
 )
@@ -22,80 +20,44 @@ type AddressData struct {
 }
 
 func CityPrefix() []string {
+
 	addressdata := &AddressData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &addressdata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(addressdata)
 	return addressdata.Address.CityPrefix
 }
 
 func stateData() []string {
+
 	addressdata := &AddressData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &addressdata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(addressdata)
 	return addressdata.Address.State
 }
 
 func suffixData() []string {
+
 	addressdata := &AddressData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &addressdata)
-	if err != nil {
-		fmt.Println(err)
-	}
-
+	faker.UnmarshalData(addressdata)
 	return addressdata.Address.StreetSuffix
 }
 
 func countryCode() []string {
+
 	addressdata := &AddressData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &addressdata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(addressdata)
 	return addressdata.Address.CountryCode
 }
 
 func countryData() []string {
+
 	addressdata := &AddressData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &addressdata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(addressdata)
 	return addressdata.Address.Country
 }
 
 func cityData() []string {
+
 	addressdata := &AddressData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &addressdata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(addressdata)
 	return addressdata.Address.City
 }
 
@@ -155,9 +117,4 @@ func Longitude() float64 {
 //Latitude return float64 of latitude
 func Latitude() float64 {
 	return rand.Float64() * 180
-}
-
-//Country return country name, panics if its cant read json data
-func main() {
-	fmt.Println(Street())
 }

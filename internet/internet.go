@@ -1,15 +1,11 @@
 package internet
 
 import (
-	"encoding/json"
 	"faker"
 	"faker/name"
-	"fmt"
 	"math/rand"
 	"strings"
 )
-
-const ALPHA = "qwertyuiopasdfghjkklzxcvbnm1234567890!@#$%^&*()+?>"
 
 type InternetData struct {
 	Internet struct {
@@ -18,35 +14,19 @@ type InternetData struct {
 	} `json:"internet"`
 }
 
+const ALPHA = "qwertyuiopasdfghjkklzxcvbnm1234567890!@#$%^&*()+?>"
+
 func publicEmail() []string {
+
 	internetdata := &InternetData{}
-
-	data, err := faker.JsonData()
-	if err != nil {
-		panic(err)
-	}
-
-	err = json.Unmarshal([]byte(data), &internetdata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(internetdata)
 	return internetdata.Internet.DomainSuffix
 }
 
 func internetDomain() []string {
+
 	internetdata := &InternetData{}
-
-	data, err := faker.JsonData()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	err = json.Unmarshal([]byte(data), &internetdata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(internetdata)
 	return internetdata.Internet.FreeEmail
 
 }
@@ -64,7 +44,7 @@ func UserName() string {
 }
 
 func Password() string {
-
+	//Need to make cleaner
 	faker.Seeder()
 	passwd := []byte(ALPHA)
 	words := make([]string, 8)

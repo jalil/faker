@@ -1,9 +1,7 @@
 package creditcard
 
 import (
-	"encoding/json"
 	"faker"
-	"fmt"
 	"math/rand"
 )
 
@@ -19,35 +17,17 @@ type CardData struct {
 }
 
 func cardType() []string {
+
 	carddata := &CardData{}
-
-	data, err := faker.JsonData()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	err = json.Unmarshal([]byte(data), &carddata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(carddata)
 	return carddata.CreditCard.CardType
 
 }
 
 func cardNumber() []string {
+
 	carddata := &CardData{}
-
-	data, err := faker.JsonData()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	err = json.Unmarshal([]byte(data), &carddata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(carddata)
 	return carddata.CreditCard.CardNumber
 
 }
@@ -65,9 +45,4 @@ func Number() string {
 func CardType() string {
 	cardlen := len(cardType())
 	return cardType()[rand.Intn(cardlen)]
-}
-
-func main() {
-	fmt.Println(Number())
-	fmt.Println(CardType())
 }

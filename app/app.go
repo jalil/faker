@@ -1,10 +1,8 @@
 package app
 
 import (
-	"encoding/json"
 	"faker"
 	"faker/name"
-	"fmt"
 	"math/rand"
 )
 
@@ -14,21 +12,15 @@ type AppData struct {
 	}
 }
 
-func AppName() []string {
-	appdata := &AppData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &appdata)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	return appdata.App.Name
-}
-
 func init() {
 	faker.Seeder()
+}
+
+func AppName() []string {
+
+	appdata := &AppData{}
+	faker.UnmarshalData(appdata)
+	return appdata.App.Name
 }
 
 func Name() string {

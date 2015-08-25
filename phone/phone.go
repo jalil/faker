@@ -1,9 +1,7 @@
 package phone
 
 import (
-	"encoding/json"
 	"faker"
-	"fmt"
 	"math/rand"
 )
 
@@ -15,28 +13,16 @@ type PhoneData struct {
 }
 
 func phoneAreaCode() []string {
+
 	phonedata := &PhoneData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &phonedata)
-	if err != nil {
-		fmt.Println(err)
-	}
-
+	faker.UnmarshalData(phonedata)
 	return phonedata.Phone.AreaCode
 }
 
 func phoneExchangeCode() []string {
+
 	phonedata := &PhoneData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &phonedata)
-	if err != nil {
-		fmt.Println(err)
-	}
-
+	faker.UnmarshalData(phonedata)
 	return phonedata.Phone.AreaCode
 }
 

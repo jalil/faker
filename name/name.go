@@ -1,9 +1,7 @@
 package name
 
 import (
-	"encoding/json"
 	"faker"
-	"fmt"
 	"math/rand"
 )
 
@@ -16,41 +14,23 @@ type NameData struct {
 }
 
 func NameFirst() []string {
+
 	namedata := &NameData{}
-
-	//read in json data
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &namedata)
-	if err != nil {
-		fmt.Println(err)
-	}
-
+	faker.UnmarshalData(namedata)
 	return namedata.Name.FirstName
 }
 
 func NamePrefix() []string {
+
 	namedata := &NameData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &namedata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(namedata)
 	return namedata.Name.PrefixName
 }
 
 func NameLast() []string {
+
 	namedata := &NameData{}
-
-	data, err := faker.JsonData()
-	err = json.Unmarshal([]byte(data), &namedata)
-	if err != nil {
-		panic(err)
-	}
-
+	faker.UnmarshalData(namedata)
 	return namedata.Name.LastName
 }
 
@@ -63,8 +43,8 @@ func FullName() string {
 }
 
 func FirstName() string {
-	return NameFirst()[0]
-	//return NameFirst()[rand.Intn(len(NameFirst()))]
+	//return NameFirst()[0]
+	return NameFirst()[rand.Intn(len(NameFirst()))]
 }
 
 func Prefix() string {

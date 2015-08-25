@@ -1,9 +1,7 @@
 package lorem
 
 import (
-	"encoding/json"
 	"faker"
-	"fmt"
 	"math/rand"
 )
 
@@ -16,22 +14,16 @@ type LoremData struct {
 }
 
 func LoremWords() []string {
+
 	loremdata := &LoremData{}
-
-	data, err := faker.JsonData()
-
-	err = json.Unmarshal([]byte(data), &loremdata)
-	if err != nil {
-		fmt.Println(err)
-	}
-
+	faker.UnmarshalData(loremdata)
 	return loremdata.Lorem.Words
 
 }
 
 func loremSentence() []string {
 	//NOT DONE
-	return loremWords()
+	return LoremWords()
 }
 
 //Runs before main
@@ -40,8 +32,8 @@ func init() {
 }
 
 func Word() string {
-	loremLen := len(loremWords())
-	return loremWords()[rand.Intn(loremLen)]
+	loremLen := len(LoremWords())
+	return LoremWords()[rand.Intn(loremLen)]
 }
 
 func Text() []string {
