@@ -11,7 +11,7 @@ import (
 
 //JsonData reads in json file
 func JsonData() ([]byte, error) {
-	data, err := ioutil.ReadFile("en-US.json")
+	data, err := ioutil.ReadFile("/Users/jalil/go/src/faker/en-US.json")
 	if err != nil {
 		//maybe use panic()?
 		fmt.Println(err)
@@ -33,6 +33,7 @@ func UnmarshalData(input interface{}) {
 		//maybe use panic()?
 		fmt.Println(err)
 	}
+
 	err = json.Unmarshal([]byte(data), &input)
 	//maybe use panic()?
 	if err != nil {

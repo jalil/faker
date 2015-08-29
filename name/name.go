@@ -13,44 +13,34 @@ type NameData struct {
 	} `json:"name"`
 }
 
-func NameFirst() []string {
-
-	namedata := &NameData{}
-	faker.UnmarshalData(namedata)
-	return namedata.Name.FirstName
-}
-
-func NamePrefix() []string {
-
-	namedata := &NameData{}
-	faker.UnmarshalData(namedata)
-	return namedata.Name.PrefixName
-}
-
-func NameLast() []string {
-
-	namedata := &NameData{}
-	faker.UnmarshalData(namedata)
-	return namedata.Name.LastName
-}
-
 func init() {
 	faker.Seeder()
 }
 
-func FullName() string {
-	return FirstName() + " " + LastName()
-}
-
 func FirstName() string {
-	//return NameFirst()[0]
-	return NameFirst()[rand.Intn(len(NameFirst()))]
+
+	namedata := &NameData{}
+	faker.UnmarshalData(namedata)
+	fnameLen := len(namedata.Name.FirstName)
+	return namedata.Name.FirstName[rand.Intn(fnameLen)]
 }
 
-func Prefix() string {
-	return NamePrefix()[rand.Intn(len(NamePrefix()))]
+func NamePrefix() string {
+
+	namedata := &NameData{}
+	faker.UnmarshalData(namedata)
+	prefixLen := len(namedata.Name.PrefixName)
+	return namedata.Name.PrefixName[rand.Intn(prefixLen)]
 }
 
 func LastName() string {
-	return NameLast()[rand.Intn(len(NameLast()))]
+
+	namedata := &NameData{}
+	faker.UnmarshalData(namedata)
+	lnameLen := len(namedata.Name.LastName)
+	return namedata.Name.LastName[rand.Intn(lnameLen)]
+}
+
+func FullName() string {
+	return FirstName() + " " + LastName()
 }
